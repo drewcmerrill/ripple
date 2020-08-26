@@ -2,23 +2,25 @@ let angle = 0;
 let w = 15;
 let ma;
 let maxD;
+let speedLabel;
+let cubeLabel;
+let fLabel;
 function setup() {
 	createCanvas(400, 400, WEBGL);
 	createP('');
 	ma = atan(1/sqrt(2));
 	maxD = dist(0, 0, width/2, height/2);
-	createP('Speed');
+	speedLabel = createP('Speed: .1');
 	angleSlider = createSlider(-.3, .3, .1, .001);
-	createP('Cubes');
-	wSlider = createSlider(30, 100, 85, .001);
-	createP('Frequency')
+	cubeLabel = createP('Cube width: 25');
+	wSlider = createSlider(30, 100, 83, .001);
+	fLabel = createP('Frequency: ' + PI);
 	offsetSlider = createSlider(0, 3*PI, PI, .001);
 }
 
 function draw() {
 	background(175);
 	ortho(400, -400, -400, 400, 0, 1000);
-	createP('')
 	rectMode(CENTER);
 	rotateX(-ma);
   rotateY(-QUARTER_PI);
@@ -41,4 +43,7 @@ function draw() {
 		}
 	}
 	angle -= angleSlider.value();
+	speedLabel.html('Speed: ' + (angleSlider.value()/.1).toFixed(2));
+	cubeLabel.html('Cube width: ' + (108 - wSlider.value()).toFixed(2));
+	fLabel.html('Frequency: ' + (offsetSlider.value()).toFixed(2));
 }
